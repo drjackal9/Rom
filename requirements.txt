@@ -1,2 +1,0 @@
-deep-translator
-requests
