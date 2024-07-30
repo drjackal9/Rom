@@ -1,31 +1,10 @@
-# Traduttore di Canzoni
+# I Miei Progetti
 
-   Questo è un semplice traduttore di canzoni con interfaccia grafica, che utilizza l'API di Google Translate.
+Benvenuto nel mio repository! Qui troverai vari progetti personali.
 
-   ## Installazione
+## Progetti Attuali:
 
-   1. Clona questo repository:
-      ```
-      git clone https://github.com/tuousername/song-translator.git
-      ```
-   2. Installa le dipendenze:
-      ```
-      pip install -r requirements.txt
-      ```
+1. Traduttore di Canzoni (branch: translator)
+   - Un'applicazione per tradurre testi di canzoni.
 
-   ## Utilizzo
-
-   Esegui lo script con:
-   ```
-   python translator.py
-   ```
-
-   Incolla il testo della canzone, seleziona le lingue e clicca su "Traduci".
-
-   ## Contribuire
-
-   Sentiti libero di aprire issues o pull requests per migliorare il progetto!
-
-   ## Licenza
-
-   Questo progetto è sotto licenza MIT. Vedi il file `LICENSE` per i dettagli.
+Per vedere un progetto specifico, passa al suo branch corrispondente.
