@@ -1,0 +1,15 @@
+# File di cache Python
+   __pycache__/
+   *.py[cod]
+
+   # Ambiente virtuale
+   venv/
+   env/
+
+   # File di sistema
+   .DS_Store
+   Thumbs.db
+
+   # File di IDE
+   .vscode/
+   .idea/
