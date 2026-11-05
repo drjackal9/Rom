@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ClanBoard — self-hosting</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<h1>Run your own copy</h1>
+<p><a href="it/self-host.html">Italiano</a> · <a href="index.html">ClanBoard</a></p>
+</header>
+<main>
+<section id="requisiti">
+<h2>What you need</h2>
+<ul>
+<li>A machine that runs containers, with Docker and the <code>compose</code> plugin. The database comes up as a container too, so nothing else has to be installed.</li>
+<li>A key for the Clash of Clans developer API. A key is tied to the public address of the machine that uses it: make it for the machine that will host the copy, or the game answers that the authorization is not valid.</li>
+<li>A Telegram bot from BotFather, with its token. One bot serves one clan.</li>
+</ul>
+</section>
+<section id="tre-comandi">
+<h2>Three commands</h2>
+<p>Clone the repository, then, inside it:</p>
+<pre><code>docker compose up -d db
+docker compose run --rm bot setup
+docker compose up -d</code></pre>
+<p>The first command raises the database, the second asks what your copy needs to know, the third starts the bot. From there the bot is alive and answers in the groups where you put it.</p>
+</section>
+<section id="segreti">
+<h2>What setup asks</h2>
+<p><code>setup</code> asks four things and stores them encrypted in the database:</p>
+<ul>
+<li>The Telegram token given by BotFather.</li>
+<li>One or more keys of the Clash of Clans API.</li>
+<li>The public address of the source code of your copy, which the licence requires.</li>
+<li>The Telegram id that receives the alerts of the copy.</li>
+</ul>
+<p>The last two accept an empty answer and can be set later with <code>secret source_url</code> and <code>secret owner_id</code>: the address of the source usually exists only after you have published your copy. There is no configuration file, not now and not ever, and nothing of this is written in clear text.</p>
+</section>
+<section id="gestione">
+<h2>Managing the copy</h2>
+<p>Every command runs from the terminal of the machine:</p>
+<pre><code>docker compose run --rm bot secret &lt;kind&gt;
+docker compose run --rm bot addbot
+docker compose run --rm bot addclan
+docker compose run --rm bot status
+docker compose run --rm bot retention --dry-run</code></pre>
+<p><code>secret</code> writes or replaces one of the facts above, <code>addbot</code> adds another bot, <code>addclan</code> ties a clan to a group, <code>status</code> says how the copy is doing, and <code>retention</code> with <code>--dry-run</code> counts what the cleanup would delete without deleting it.</p>
+<p>Two more kinds are worth knowing by name. <code>secret channel_url</code> holds the address of the official community of the copy: when it is set, the home page and <code>/support</code> show the link, and when it is not, nothing of it appears anywhere. <code>secret otp_reset</code>, given the username or the Telegram id of a manager, clears the Authenticator code of that person from the server: it is the only way back in when the phone with the codes is gone, and it runs on the machine, never from a chat.</p>
+</section>
+<section id="miniapp">
+<h2>The Mini App</h2>
+<p>Inside Telegram everyone opens their own Mini App from the button on the message pinned in the clan group. The button shows up by itself once your copy has two things: the public address of the service, stored with <code>secret site_base</code>, and the Mini App registered on the console bot of the copy.</p>
+<p>The Mini App is registered once, from BotFather: <code>/newapp</code>, then the console bot, short name <code>app</code> and address <code>&lt;site_base&gt;/app</code>. Without a public address the pinned message stays as it is, with no button, and the rest of the copy works the same.</p>
+<p>Whoever opens the page is recognised by the signature Telegram hands over at the opening: what they can do is decided by the bot from the role the game gives their village, not by the page.</p>
+</section>
+<section id="backup">
+<h2>Backup and watchman</h2>
+<p><code>ops/vps/backup.sh</code> takes the dump of the database, copies the master key out of its volume and then keeps only the three most recent dumps in the backup folder, deleting the older ones. It cleans up only after a dump that worked, and never touches the master key. <code>ops/vps/guard.sh</code> watches the containers, the age of the last dump, the size of the database and the errors in the log, and writes to the owner when something is off.</p>
+<p>Both are meant to run on a schedule of the machine that hosts your copy. That schedule stays outside the repository, because it belongs to your machine and not to the program.</p>
+</section>
+<section id="ops">
+<h2>Ops: how your copy is doing</h2>
+<p>The health of a copy is visible inside Telegram only, in the console bot, and only to the id set with <code>secret owner_id</code>: the panel has an <b>Ops</b> section with the memory and the processor of each container, the load and the free memory of the machine, the size of the database, the age of the last dump, how long the last round of checks took, the commands from the app still waiting, the recent errors, the answer of the public probe and the Clash keys still alive. Green means the number is inside the ceilings decided for the copy, yellow that the measure is missing, red that it is over.</p>
+<p>None of this needs a scheduler of the machine or the socket of Docker. Every container measures itself from its own cgroup files, the bot asks the database its size in SQL, reads the age of the dump from the backup log mounted read only, and calls <code>status.json</code> on the public address of your copy from the outside, which is the proof that the tunnel and the web answer. When something goes over a ceiling the owner gets one message, once, until the number comes back down.</p>
+<p>There is no ops page on your domain: the web serves the anonymous status page and nothing else with numbers in it.</p>
+</section>
+<section id="licenza">
+<h2>What the licence asks of you</h2>
+<p>ClanBoard is published under the AGPL-3.0. Running a modified copy that people can reach over a network means publishing your source and setting its address with <code>secret source_url</code>: the bot shows it to whoever asks, in <code>/support</code>.</p>
+<p>An unmodified copy has nothing to publish, but the address of this source is still the honest answer to give.</p>
+</section>
+</main>
+<footer>
+<p>ClanBoard · Copyright (C) 2026 Alexandru Bumbac (@drjackal9) · AGPL-3.0 · <a href="__SOURCE__">source code</a></p>
+<p>This material is unofficial and is not endorsed by Supercell. For more information see Supercell's Fan Content Policy: www.supercell.com/fan-content-policy</p>
+</footer>
+</body>
+</html>

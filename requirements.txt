@@ -1,0 +1,7 @@
+python-telegram-bot==22.8
+httpx==0.28.1
+asyncpg==0.31.0
+cryptography==50.0.1
+tzdata==2025.2
+Pillow==12.3.0
+discord.py==2.7.1

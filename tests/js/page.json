@@ -1,0 +1,707 @@
+{
+ "page": {
+  "v": 1,
+  "updated": 1789000000,
+  "lang": "it",
+  "tz": "Europe/Rome",
+  "clan": {
+   "name": "Nostro Clan",
+   "level": 12,
+   "league": "Crystal League I",
+   "members": 4,
+   "accent": null,
+   "badge": "https://api-assets.clashofclans.com/badges/200/uno.png"
+  },
+  "war": {
+   "kind": "war",
+   "day": null,
+   "state": "inWar",
+   "size": 3,
+   "per_member": 2,
+   "start": 1789120800,
+   "end": 1789207200,
+   "us": {
+    "name": "Nostro Clan",
+    "stars": 2,
+    "destr": 26.67,
+    "attacks": 1
+   },
+   "them": {
+    "name": "Clan Nemico",
+    "stars": 0,
+    "destr": 0.0,
+    "attacks": 0
+   },
+   "last_attacks": [
+    {
+     "tag": "#P1",
+     "stars": 2,
+     "destr": 80.0,
+     "at": 1
+    }
+   ]
+  },
+  "rows": [
+   {
+    "pos": 1,
+    "name": "Bowser",
+    "th": 14,
+    "best": 2,
+    "by": [
+     "Mario"
+    ],
+    "assignee": "Luigi",
+    "assignee_tag": "#P2",
+    "history": [
+     {
+      "name": "Mario",
+      "stars": 2,
+      "destr": 80.0
+     }
+    ],
+    "note": "regine prima",
+    "swap": false
+   },
+   {
+    "pos": 2,
+    "name": "Wario",
+    "th": 14,
+    "best": 0,
+    "by": [],
+    "assignee": null,
+    "assignee_tag": null,
+    "history": [],
+    "note": null,
+    "swap": false
+   },
+   {
+    "pos": 3,
+    "name": "Waluigi",
+    "th": 14,
+    "best": 0,
+    "by": [],
+    "assignee": null,
+    "assignee_tag": null,
+    "history": [],
+    "note": null,
+    "swap": false
+   }
+  ],
+  "ours": [
+   {
+    "pos": 1,
+    "name": "Mario",
+    "tag": "#P1",
+    "th": 14,
+    "left": 1,
+    "stars": 2,
+    "destr": 80.0
+   },
+   {
+    "pos": 2,
+    "name": "Luigi",
+    "tag": "#P2",
+    "th": 14,
+    "left": 2,
+    "stars": 0,
+    "destr": 0.0
+   },
+   {
+    "pos": 3,
+    "name": "Peach",
+    "tag": "#P3",
+    "th": 14,
+    "left": 2,
+    "stars": 0,
+    "destr": 0.0
+   }
+  ],
+  "members": [
+   {
+    "name": "Mario",
+    "role": "leader",
+    "th": 16,
+    "trophies": 5400,
+    "donations": 1200,
+    "received": 300,
+    "tag": "#P1",
+    "linked": false,
+    "verified": false,
+    "avail": null
+   },
+   {
+    "name": "Luigi",
+    "role": "coLeader",
+    "th": 15,
+    "trophies": 5100,
+    "donations": 800,
+    "received": 900,
+    "tag": "#P2",
+    "linked": false,
+    "verified": false,
+    "avail": null
+   },
+   {
+    "name": "Peach",
+    "role": "admin",
+    "th": 14,
+    "trophies": 4700,
+    "donations": 400,
+    "received": 100,
+    "tag": "#P3",
+    "linked": false,
+    "verified": false,
+    "avail": null
+   },
+   {
+    "name": "Toad",
+    "role": "member",
+    "th": 13,
+    "trophies": 4200,
+    "donations": 50,
+    "received": 700,
+    "tag": "#P4",
+    "linked": false,
+    "verified": false,
+    "avail": null
+   }
+  ],
+  "record": {
+   "wars": 30,
+   "wins": 18
+  },
+  "growth": {
+   "days": [
+    "2026-09-20",
+    "2026-09-21",
+    "2026-09-22"
+   ],
+   "players": {
+    "#P1": {
+     "trophies": [
+      5300,
+      5350,
+      5400
+     ],
+     "th": [
+      16,
+      16,
+      16
+     ]
+    },
+    "#P2": {
+     "trophies": [
+      5000,
+      null,
+      5100
+     ],
+     "th": [
+      15,
+      15,
+      15
+     ]
+    }
+   },
+   "clan": {
+    "trophies": [
+     10300,
+     10350,
+     10500
+    ]
+   },
+   "period": {
+    "week": {
+     "#P1": {
+      "donated": 300,
+      "war_stars": 12,
+      "levels": 2,
+      "score": 40
+     },
+     "#P2": {
+      "donated": 200,
+      "war_stars": 9,
+      "levels": 1,
+      "score": 30
+     }
+    },
+    "month": {
+     "#P1": {
+      "donated": 900,
+      "war_stars": 40,
+      "levels": 6,
+      "score": 120
+     },
+     "#P2": {
+      "donated": 700,
+      "war_stars": 30,
+      "levels": 4,
+      "score": 90
+     },
+     "#P3": {
+      "donated": 400,
+      "war_stars": 20,
+      "levels": 3,
+      "score": 60
+     }
+    }
+   }
+  },
+  "medals": {
+   "#P1": [
+    {
+     "badge": "th",
+     "ts": 1789000000
+    }
+   ]
+  },
+  "sections": {
+   "wars": [
+    "10:00 · <b>Mario</b> ➜ #1"
+   ],
+   "members": []
+  },
+  "events": [
+   {
+    "pack": "members",
+    "kind": "join",
+    "who": "Toad",
+    "n": 13,
+    "at": 1788900000
+   },
+   {
+    "pack": "members",
+    "kind": "leave",
+    "who": "Wario",
+    "n": null,
+    "at": 1788950000
+   },
+   {
+    "pack": "wars",
+    "kind": "war_end",
+    "who": "Clan Nemico",
+    "n": 3,
+    "at": 1788990000
+   }
+  ],
+  "idle": [
+   {
+    "tag": "#P4",
+    "name": "Toad",
+    "days": 5
+   }
+  ],
+  "recap": {
+   "season": "2026-08",
+   "players": [
+    {
+     "tag": "#P1",
+     "name": "Mario",
+     "score": 120,
+     "wins": 40,
+     "war_stars": 30,
+     "donated": 900,
+     "levels": 6
+    },
+    {
+     "tag": "#P2",
+     "name": "Luigi",
+     "score": 90,
+     "wins": 30,
+     "war_stars": 20,
+     "donated": 700,
+     "levels": 4
+    }
+   ],
+   "medals": {
+    "#P1": [
+     "th",
+     "quiz"
+    ]
+   }
+  },
+  "seats": {
+   "777": {
+    "tag": "#P1",
+    "name": "Mario",
+    "level": "manager",
+    "lang": "it",
+    "avail": "in",
+    "goal": {
+     "kind": "trophies",
+     "hero": null,
+     "target": 5500,
+     "value": 5400,
+     "picks": [
+      {
+       "kind": "trophies",
+       "hero": null,
+       "target": 5500
+      },
+      {
+       "kind": "trophies",
+       "hero": null,
+       "target": 6000
+      },
+      {
+       "kind": "hero",
+       "hero": "Barbarian King",
+       "target": 45
+      }
+     ]
+    }
+   },
+   "888": {
+    "tag": "#P3",
+    "name": "Peach",
+    "level": null,
+    "lang": "it",
+    "avail": "in",
+    "verified": true
+   },
+   "999": {
+    "tag": "#P9",
+    "name": "Fuori",
+    "level": null,
+    "lang": "it",
+    "verified": false
+   }
+  },
+  "profiles": {
+   "777": {
+    "name": "Mario",
+    "tag": "#P1",
+    "th": 16,
+    "league": "Crystal League I",
+    "trophies": 5400,
+    "best": 5600,
+    "stars": 900,
+    "heroes": "👑40",
+    "donations": 1200,
+    "pref": "in"
+   }
+  },
+  "agenda": [
+   {
+    "key": "raid",
+    "start": 10,
+    "end": 30,
+    "state": "ongoing"
+   }
+  ],
+  "wars": [
+   {
+    "them": "Clan Nemico",
+    "us_stars": 30,
+    "them_stars": 28,
+    "us_destr": 91.5,
+    "them_destr": 88.0,
+    "result": "win",
+    "ended": 1788990000
+   },
+   {
+    "them": "Altro Clan",
+    "us_stars": 24,
+    "them_stars": 27,
+    "us_destr": 80.0,
+    "them_destr": 84.25,
+    "result": "lose",
+    "ended": 1788900000
+   }
+  ],
+  "last_war": {
+   "them": "Clan Nemico",
+   "us_stars": 30,
+   "them_stars": 28,
+   "us_destr": 91.5,
+   "them_destr": 88.0,
+   "result": "win",
+   "ended": 1788990000
+  },
+  "games": {
+   "duels": [],
+   "predictions": [],
+   "quiz": {
+    "open": true,
+    "question": "Q?",
+    "options": [
+     "a",
+     "b"
+    ],
+    "answered": [
+     "#P9"
+    ]
+   }
+  },
+  "cwl": null,
+  "advice": {
+   "14": {
+    "avg_stars": 1.75,
+    "best": [
+     {
+      "name": "Mario",
+      "stars": 3.0,
+      "count": 2
+     },
+     {
+      "name": "Luigi",
+      "stars": 1.5,
+      "count": 2
+     }
+    ]
+   }
+  },
+  "attack_videos": {
+   "14": [
+    {
+     "video_id": "vid1",
+     "title": "TH14 anti tre stelle",
+     "channel": "UCcanale"
+    }
+   ]
+  },
+  "bases": {},
+  "recruit": {
+   "open": true,
+   "free": 7,
+   "requirement": 15,
+   "page_on": true,
+   "code": "ab12cd"
+  },
+  "family": null,
+  "award": null,
+  "duels": [],
+  "manage": {
+   "777": {
+    "settings": null,
+    "staff": {
+     "paused": false,
+     "undo": true,
+     "pending": [
+      {
+       "who": "9a0b1c2d3e4f5061",
+       "name": "Toad",
+       "tag": "#P9"
+      }
+     ],
+     "approved": [
+      {
+       "who": "7a0b1c2d3e4f5061",
+       "name": "Mario",
+       "trusted": false
+      }
+     ],
+     "reports": [
+      {
+       "code": "abc123",
+       "reason": "scam",
+       "at": 1789000000.0
+      }
+     ],
+     "delegates": [
+      {
+       "who": "8f1c2d3e4a5b6c7d8e9f0a1b2c3d4e5f",
+       "name": "Luigi"
+      }
+     ],
+     "people": [
+      {
+       "who": "7a1b2c3d4e5f60718293a4b5c6d7e8f9",
+       "name": "Mario"
+      }
+     ],
+     "suspended": [
+      {
+       "who": "9b0c1d2e3f405162738495a6b7c8d9e0",
+       "name": "Peach"
+      }
+     ],
+     "log": [
+      {
+       "what": "pausa",
+       "who": "Mario",
+       "at": 1,
+       "of": null,
+       "ref": null
+      }
+     ]
+    }
+   }
+  },
+  "tools": {
+   "wars": {
+    "proposals": [
+     {
+      "tag": "#P2",
+      "name": "Luigi",
+      "missed": 2
+     }
+    ],
+    "warnings": [
+     {
+      "id": "w1",
+      "name": "Peach",
+      "missed": 1,
+      "at": 1
+     }
+    ]
+   },
+   "recruitment": {
+    "min_th": 14,
+    "applications": [
+     {
+      "id": "1",
+      "name": "Nuovo",
+      "th": 15,
+      "goals": [
+       "war"
+      ]
+     }
+    ],
+    "blocked": [
+     {
+      "id": "3",
+      "name": "Spam"
+     }
+    ]
+   },
+   "leaders": {
+    "gate": true,
+    "texts": {
+     "welcome": "Ciao",
+     "rules": "Regole"
+    },
+    "scheduled": [
+     {
+      "id": "1",
+      "hhmm": "20:30",
+      "days": [],
+      "text": "Ci siamo"
+     }
+    ],
+    "notes": [
+     {
+      "tag": "#P1",
+      "name": "Mario",
+      "text": "segreto"
+     }
+    ],
+    "channels": [
+     {
+      "id": "UCaaaaaaaaaaaaaaaaaaaaaa",
+      "title": "Canale"
+     }
+    ]
+   },
+   "family": {
+    "name": "Famiglia",
+    "code": "fam1",
+    "owner": 777,
+    "derby": {
+     "text": "DERBY",
+     "buttons": [
+      [
+       {
+        "label": "Stelle",
+        "data": "dy:metric:stars"
+       }
+      ]
+     ]
+    },
+    "tourney": {
+     "text": "TORNEO",
+     "buttons": [
+      [
+       {
+        "label": "Apri",
+        "data": "tr:go"
+       }
+      ]
+     ]
+    }
+   },
+   "integrations": {
+    "twitch": "canale",
+    "discord": true,
+    "ics": false
+   }
+  },
+  "views": {},
+  "known": [
+   "75d246df2b75ff71"
+  ],
+  "approved": {
+   "ca58d1cb11cbf32e": {
+    "since": 1789000000,
+    "war_from": 0
+   },
+   "581ef2a794991bd4": {
+    "since": 1789000000,
+    "war_from": 0
+   }
+  },
+  "banned": []
+ },
+ "seats": {
+  "gestore": {
+   "tag": "#P1",
+   "name": "Mario",
+   "level": "manager",
+   "lang": "it",
+   "avail": "in",
+   "goal": {
+    "kind": "trophies",
+    "hero": null,
+    "target": 5500,
+    "value": 5400,
+    "picks": [
+     {
+      "kind": "trophies",
+      "hero": null,
+      "target": 5500
+     },
+     {
+      "kind": "trophies",
+      "hero": null,
+      "target": 6000
+     },
+     {
+      "kind": "hero",
+      "hero": "Barbarian King",
+      "target": 45
+     }
+    ]
+   },
+   "uid": 777,
+   "who": "Chi",
+   "mark": "ca58d1cb11cbf32e"
+  },
+  "piena": {
+   "tag": "#P3",
+   "name": "Peach",
+   "level": null,
+   "lang": "it",
+   "avail": "in",
+   "verified": true,
+   "uid": 888,
+   "who": "Chi",
+   "mark": "581ef2a794991bd4"
+  },
+  "ridotta": {
+   "tag": "#P9",
+   "name": "Fuori",
+   "level": null,
+   "lang": "it",
+   "verified": false,
+   "uid": 999,
+   "who": "Chi",
+   "mark": "75d246df2b75ff71"
+  },
+  "estraneo": {
+   "uid": 555,
+   "who": "Chi",
+   "mark": "add85674c86b8852",
+   "level": null
+  }
+ },
+ "now": 1789000000
+}

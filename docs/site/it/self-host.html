@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ClanBoard — ospitalo tu</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header>
+<h1>Ospita la tua copia</h1>
+<p><a href="../self-host.html">English</a> · <a href="index.html">ClanBoard</a></p>
+</header>
+<main>
+<section id="requisiti">
+<h2>Cosa serve</h2>
+<ul>
+<li>Una macchina che fa girare i contenitori, con Docker e il plugin <code>compose</code>. Anche il database sale come contenitore, quindi non c'è altro da installare.</li>
+<li>Una chiave dell'API per sviluppatori di Clash of Clans. Una chiave è legata all'indirizzo pubblico della macchina che la usa: falla per la macchina che ospiterà la copia, altrimenti il gioco risponde che l'autorizzazione non è valida.</li>
+<li>Un bot Telegram di BotFather, con il suo token. Un bot serve un clan.</li>
+</ul>
+</section>
+<section id="tre-comandi">
+<h2>Tre comandi</h2>
+<p>Clona il repository, poi, dentro:</p>
+<pre><code>docker compose up -d db
+docker compose run --rm bot setup
+docker compose up -d</code></pre>
+<p>Il primo comando alza il database, il secondo chiede quello che la tua copia deve sapere, il terzo accende il bot. Da lì in poi il bot è vivo e risponde nei gruppi dove lo metti.</p>
+</section>
+<section id="segreti">
+<h2>Cosa chiede setup</h2>
+<p><code>setup</code> chiede quattro cose e le salva cifrate nel database:</p>
+<ul>
+<li>Il token Telegram dato da BotFather.</li>
+<li>Una o più chiavi dell'API di Clash of Clans.</li>
+<li>L'indirizzo pubblico del codice sorgente della tua copia, che la licenza richiede.</li>
+<li>L'id Telegram che riceve gli avvisi della copia.</li>
+</ul>
+<p>Gli ultimi due accettano una risposta vuota e si mettono dopo con <code>secret source_url</code> e <code>secret owner_id</code>: l'indirizzo del sorgente di solito esiste solo dopo che hai pubblicato la tua copia. Non c'è nessun file di configurazione, né ora né mai, e niente di tutto questo viene scritto in chiaro.</p>
+</section>
+<section id="gestione">
+<h2>Gestire la copia</h2>
+<p>Ogni comando si dà dal terminale della macchina:</p>
+<pre><code>docker compose run --rm bot secret &lt;kind&gt;
+docker compose run --rm bot addbot
+docker compose run --rm bot addclan
+docker compose run --rm bot status
+docker compose run --rm bot retention --dry-run</code></pre>
+<p><code>secret</code> scrive o sostituisce una delle cose qui sopra, <code>addbot</code> aggiunge un altro bot, <code>addclan</code> lega un clan a un gruppo, <code>status</code> dice come sta la copia, e <code>retention</code> con <code>--dry-run</code> conta quello che la pulizia cancellerebbe senza cancellarlo.</p>
+<p>Altre due voci vale la pena chiamarle per nome. <code>secret channel_url</code> tiene l'indirizzo della community ufficiale della copia: quando c'è, il link esce sulla home e in <code>/support</code>; quando non c'è, non compare da nessuna parte. <code>secret otp_reset</code>, con lo username o l'id Telegram di un gestore, toglie dal server il codice dell'Authenticator di quella persona: è l'unica via di rientro quando il telefono con i codici non c'è più, e si dà sulla macchina, mai da una chat.</p>
+</section>
+<section id="miniapp">
+<h2>La Mini App</h2>
+<p>Dentro Telegram ognuno apre la sua Mini App dal bottone del messaggio fissato nel gruppo del clan. Il bottone compare da solo quando la tua copia ha due cose: l'indirizzo pubblico del servizio, salvato con <code>secret site_base</code>, e la Mini App registrata sul bot console della copia.</p>
+<p>La Mini App si registra una volta sola, da BotFather: <code>/newapp</code>, poi il bot console, nome corto <code>app</code> e indirizzo <code>&lt;site_base&gt;/app</code>. Senza indirizzo pubblico il fissato resta com'è, senza bottone, e il resto della copia funziona lo stesso.</p>
+<p>Chi apre la pagina è riconosciuto dalla firma che Telegram consegna all'apertura: quello che può fare lo decide il bot dal ruolo che il gioco dà al suo villaggio, non la pagina.</p>
+</section>
+<section id="backup">
+<h2>Backup e guardiano</h2>
+<p><code>ops/vps/backup.sh</code> prende il dump del database, copia la chiave master dal suo volume e poi tiene solo i tre dump più recenti nella cartella dei backup, cancellando i più vecchi. La pulizia parte solo dopo un dump riuscito e la chiave master non si tocca mai. <code>ops/vps/guard.sh</code> guarda i contenitori, l'età dell'ultimo dump, quanto pesa il database e gli errori nel log, e scrive al proprietario quando qualcosa non torna.</p>
+<p>Vanno fatti girare a orario dalla macchina che ospita la tua copia. Quell'orario resta fuori dal repository, perché è della tua macchina e non del programma.</p>
+</section>
+<section id="ops">
+<h2>Ops: come sta la tua copia</h2>
+<p>La salute di una copia si guarda solo dentro Telegram, nel bot console, e solo dall'id messo con <code>secret owner_id</code>: il pannello ha una sezione <b>Ops</b> con memoria e processore di ogni contenitore, carico e memoria libera della macchina, dimensione del database, età dell'ultimo dump, quanto è durato l'ultimo giro di controlli, i comandi dall'app ancora in attesa, gli errori recenti, la risposta della sonda pubblica e le chiavi Clash ancora vive. Verde vuol dire che il numero sta dentro le soglie decise per la copia, giallo che la misura manca, rosso che è oltre.</p>
+<p>Niente di tutto questo ha bisogno di un orario della macchina o del socket di Docker. Ogni contenitore si misura dai propri file cgroup, il bot chiede al database quanto pesa con SQL, legge l'età del dump dal registro dei backup montato in sola lettura e chiama <code>status.json</code> sull'indirizzo pubblico della tua copia da fuori, che è la prova che il tunnel e il web rispondono. Quando qualcosa supera una soglia il proprietario riceve un messaggio, uno solo, finché il numero non rientra.</p>
+<p>Sul tuo dominio non c'è nessuna pagina ops: il web pubblica la pagina di stato anonima e nient'altro che abbia numeri dentro.</p>
+</section>
+<section id="licenza">
+<h2>Cosa ti chiede la licenza</h2>
+<p>ClanBoard è pubblicato con la AGPL-3.0. Far girare una copia modificata che le persone raggiungono in rete vuol dire pubblicare il tuo sorgente e metterne l'indirizzo con <code>secret source_url</code>: il bot lo mostra a chi lo chiede, in <code>/support</code>.</p>
+<p>Una copia non modificata non ha niente da pubblicare, ma l'indirizzo di questo sorgente resta comunque la risposta onesta da dare.</p>
+</section>
+</main>
+<footer>
+<p>ClanBoard · Copyright (C) 2026 Alexandru Bumbac (@drjackal9) · AGPL-3.0 · <a href="__SOURCE__">codice sorgente</a></p>
+<p>Questo materiale non è ufficiale e non è approvato da Supercell. Per maggiori informazioni vedi la Fan Content Policy di Supercell: www.supercell.com/fan-content-policy</p>
+</footer>
+</body>
+</html>

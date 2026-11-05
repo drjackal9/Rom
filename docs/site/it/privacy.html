@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ClanBoard — dati e privacy</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header>
+<h1>Dati e privacy</h1>
+<p><a href="../privacy.html">English</a> · <a href="index.html">ClanBoard</a></p>
+</header>
+<main>
+<section id="cosa-si-salva">
+<h2>Cosa viene salvato</h2>
+<p>I dati pubblici del gioco, presi dall'API ufficiale di Clash of Clans: il clan, i suoi membri, le guerre, la lega, la Capitale, i Giochi del Clan. Sono gli stessi dati che il gioco mostra a chiunque cerchi il tag del clan.</p>
+<p>Più quello che il clan scrive attraverso il bot: il collegamento fra un account Telegram e il tag di un giocatore, per chi si collega da sé con <code>/collega</code>; le note e le ammonizioni che scrivono i capi; le candidature di chi chiede di entrare.</p>
+<p>Nessuno viene collegato d'ufficio. Senza il collegamento il bot funziona lo stesso per il gruppo, semplicemente non sa quale giocatore sei.</p>
+</section>
+<section id="cifratura">
+<h2>Come viene tenuto</h2>
+<p>Tutto quello che il bot salva è cifrato con AES-GCM prima di arrivare al database. La chiave maestra vive in un volume a parte della macchina: mai dentro il database, mai dentro il repository, mai in un file che viaggia con il codice.</p>
+<p>Chi legge una copia del database senza quella chiave trova righe che non dicono niente: i contenuti sono cifrati, e anche gli indici che ritrovano un collegamento nascono dalla stessa chiave.</p>
+</section>
+<section id="quanto-resta">
+<h2>Quanto resta</h2>
+<ul>
+<li>Guerre: le ultime 100 di ogni clan. Le più vecchie si cancellano, e le classifiche costruite su di loro vanno dietro.</li>
+<li>Clan disattivati: cancellati dopo 90 giorni, con tutto quello che gli sta appeso.</li>
+<li>Chiavi e righe che hanno una scadenza: cancellate nella stessa pulizia, quando la data è passata.</li>
+</ul>
+<p>La pulizia gira insieme al backup della macchina che ospita la copia, e si può contare prima che cancelli qualcosa.</p>
+</section>
+<section id="come-si-esce">
+<h2>Come si esce</h2>
+<p><code>/scollega</code> toglie il collegamento fra il tuo account Telegram e il tag del tuo giocatore. Da quel momento il bot non sa più chi sei nel gioco, e il tuo nome torna a essere soltanto un dato pubblico del clan.</p>
+<p>Quando un clan lascia il bot, i capi possono disattivarlo: dopo di che tutto quello che il clan aveva salvato se ne va con la pulizia.</p>
+</section>
+<section id="chi-riceve">
+<h2>Chi altro lo vede</h2>
+<p>Nessuno. Non c'è nessun terzo, nessun tracciatore, nessuna pubblicità, nessun cookie, nessun account da aprire su un sito. Questa pagina è testo e un foglio di stile: non carica niente da nessuna parte e non sa che l'hai letta.</p>
+<p>Il bot parla con due servizi soltanto: Telegram, per mandare i messaggi, e l'API ufficiale di Clash of Clans, per leggere il clan.</p>
+</section>
+</main>
+<footer>
+<p>ClanBoard · Copyright (C) 2026 Alexandru Bumbac (@drjackal9) · AGPL-3.0 · <a href="__SOURCE__">codice sorgente</a></p>
+<p>Questo materiale non è ufficiale e non è approvato da Supercell. Per maggiori informazioni vedi la Fan Content Policy di Supercell: www.supercell.com/fan-content-policy</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,41 @@
+name: pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  costruisci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: cp -R docs/site sito
+      - env:
+          SORGENTE: ${{ github.server_url }}/${{ github.repository }}
+        run: grep -rl __SOURCE__ sito | xargs sed -i "s|__SOURCE__|$SORGENTE|g"
+      - run: test -z "$(grep -rl __SOURCE__ sito)"
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: sito
+
+  pubblica:
+    needs: costruisci
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.pubblicazione.outputs.page_url }}
+    steps:
+      - id: pubblicazione
+        uses: actions/deploy-pages@v5

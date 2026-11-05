@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ClanBoard — data and privacy</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<h1>Data and privacy</h1>
+<p><a href="it/privacy.html">Italiano</a> · <a href="index.html">ClanBoard</a></p>
+</header>
+<main>
+<section id="cosa-si-salva">
+<h2>What is kept</h2>
+<p>Public game data, taken from the official Clash of Clans API: the clan, its members, wars, the league, the Capital, Clan Games. It is the same data the game shows to anybody who looks up the clan tag.</p>
+<p>Plus what the clan writes through the bot: the link between a Telegram account and a player tag, for whoever links themselves with <code>/link</code>; the notes and the warnings the leaders write; the applications people send to join.</p>
+<p>Nobody is linked by force. Without the link the bot still works for the group, it simply does not know which player you are.</p>
+</section>
+<section id="cifratura">
+<h2>How it is kept</h2>
+<p>Everything the bot stores is encrypted with AES-GCM before it reaches the database. The master key lives in a separate volume of the machine: never inside the database, never inside the repository, never in a file that travels with the code.</p>
+<p>Whoever reads a copy of the database without that key finds rows that say nothing: the contents are encrypted, and even the indexes that find a link again are derived from the same key.</p>
+</section>
+<section id="quanto-resta">
+<h2>How long it stays</h2>
+<ul>
+<li>Wars: the last 100 of each clan. The older ones are deleted, and the leaderboards built on them follow.</li>
+<li>Clans that are deactivated: deleted after 90 days, with everything that hangs from them.</li>
+<li>Keys and rows that carry an expiry date: deleted in the same cleanup, once the date has passed.</li>
+</ul>
+<p>The cleanup runs with the backup of the machine that hosts the copy, and it can be counted before it deletes anything.</p>
+</section>
+<section id="come-si-esce">
+<h2>How to leave</h2>
+<p><code>/unlink</code> removes the link between your Telegram account and your player tag. From that moment the bot no longer knows who you are in the game, and your name goes back to being just public game data of the clan.</p>
+<p>When a clan leaves the bot, the leaders can deactivate it: after that everything the clan had stored goes away with the cleanup.</p>
+</section>
+<section id="chi-riceve">
+<h2>Who else sees it</h2>
+<p>Nobody. There is no third party, no tracker, no advertising, no cookie, no account to open on a site. This page is plain text and a style sheet: it does not load anything from anywhere and it does not know you have read it.</p>
+<p>The bot talks to two services only: Telegram, to send the messages, and the official Clash of Clans API, to read the clan.</p>
+</section>
+</main>
+<footer>
+<p>ClanBoard · Copyright (C) 2026 Alexandru Bumbac (@drjackal9) · AGPL-3.0 · <a href="__SOURCE__">source code</a></p>
+<p>This material is unofficial and is not endorsed by Supercell. For more information see Supercell's Fan Content Policy: www.supercell.com/fan-content-policy</p>
+</footer>
+</body>
+</html>

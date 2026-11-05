@@ -1,0 +1,198 @@
+{
+ "app": [
+  {
+   "stride": "spoofing",
+   "minaccia": "chi ha solo il link si spaccia per membro del clan e apre l'app",
+   "chiude": "il livello nasce dalla firma di Telegram e dalla porta pubblicata dal bot, non dal link",
+   "prova": "test_i_quattro_livelli_di_vista_sono_quelli_della_spec",
+   "casella": {
+    "minaccia": "un membro si approva da solo mandando person.approve col proprio nome",
+    "chiude": "person.approve vale il livello links: chi non e anziano, co-capo o capo verificato prende not_manager alla porta e al bot",
+    "prova": "test_il_membro_non_si_approva_da_solo"
+   }
+  },
+  {
+   "stride": "tampering",
+   "minaccia": "il visitatore cambia lo slug nell'URL e legge l'app di un altro clan",
+   "chiude": "l'impronta e lo slug viaggiano insieme: l'impronta di un clan non apre la porta di un altro",
+   "prova": "test_il_membro_di_un_altro_clan_con_questo_slug_e_un_estraneo",
+   "casella": {
+    "minaccia": "il gestore manda l'impronta di una persona presa da un altro clan",
+    "chiude": "la persona si cerca fra le impronte coniate con lo slug di questo clan: un'impronta di fuori non trova nessuno",
+    "prova": "test_l_impronta_di_un_altro_clan_non_approva_nessuno"
+   }
+  },
+  {
+   "stride": "repudiation",
+   "minaccia": "un gesto entra senza firma e nessuno puo dire chi l'ha mandato",
+   "chiude": "solo l'init data firmato da Telegram apre un posto: senza firma non c'e posto e ogni gesto porta l'uid di chi l'ha mandato",
+   "prova": "test_senza_la_firma_di_telegram_non_c_e_nessun_posto",
+   "casella": {
+    "minaccia": "un gestore approva, revoca o mette il segno e nessuno sa chi e stato",
+    "chiude": "ogni gesto di Casella scrive la riga nel registro del clan con chi e quale gesto, senza dati della persona",
+    "prova": "test_ogni_gesto_della_casella_lascia_la_riga_nel_registro"
+   }
+  },
+  {
+   "stride": "information_disclosure",
+   "minaccia": "la vista ridotta riceve guerra, basi, lega, piani e prenotazioni nello stato",
+   "chiude": "la pagina viene filtrata per livello prima di costruire le viste, non dopo",
+   "prova": "test_la_vista_ridotta_non_riceve_guerra_basi_lega_piani_ne_prenotazioni",
+   "casella": {
+    "minaccia": "la Casella porta gli uid delle persone da approvare",
+    "chiude": "le persone si nominano con l'impronta cieca della pagina; l'anziano riceve solo chi aspetta il si",
+    "prova": "test_la_casella_nomina_le_persone_con_l_impronta_mai_con_l_uid"
+   }
+  },
+  {
+   "stride": "denial_of_service",
+   "minaccia": "un visitatore martella le rotte dell'app e consuma il server per tutti",
+   "chiude": "il secchiello per indirizzo chiude con 429 prima di leggere la pagina",
+   "prova": "test_il_martellamento_sulle_rotte_dell_app_prende_429",
+   "casella": {
+    "minaccia": "una lettura vuota della rosa toglie il si a tutto il clan",
+    "chiude": "il si cade all'uscita solo se la rosa letta ha membri; il segno va e viene lo tiene",
+    "prova": "test_la_rosa_vuota_non_toglie_il_si_a_nessuno"
+   }
+  },
+  {
+   "stride": "elevation_of_privilege",
+   "minaccia": "chi non e approvato manda un gesto e si comporta da membro pieno",
+   "chiude": "ogni gesto passa da why, che confronta il livello di vista col livello richiesto",
+   "prova": "test_il_gesto_della_vista_ridotta_e_rifiutato_col_codice_giusto",
+   "casella": {
+    "minaccia": "un anziano revoca o mette il segno, o un bandito viene approvato",
+    "chiude": "revoca e segno valgono il livello views (co-capi e capo); chi e bandito prende banned e resta fuori",
+    "prova": "test_l_anziano_non_revoca_e_non_mette_il_segno"
+   }
+  }
+ ],
+ "console": [
+  {
+   "stride": "spoofing",
+   "minaccia": "un estraneo preme i bottoni del console su un bot che non e suo",
+   "chiude": "may_touch legge il posto vero: fuori dal clan e senza il bot in mano non si passa",
+   "prova": "test_nobody_touches_the_bot_of_another_user",
+   "segnala": {
+    "minaccia": "un membro si spaccia per il delegato e scrive al gestore a testo libero",
+    "chiude": "il testo libero passa solo a chi platform.level riconosce dall'uid firmato da Telegram; al membro on_text risponde col motivo e non consegna niente",
+    "prova": "test_il_membro_non_manda_testo_libero"
+   },
+   "crea": {
+    "minaccia": "un capo solo rivendicato si spaccia per capo verificato e crea il bot",
+    "chiude": "linked_leader conta solo i collegamenti provati col token; create_managed rilegge la rosa alla nascita e link_clan la rilegge quando il bot entra nel gruppo",
+    "prova": "test_il_capo_solo_rivendicato_non_crea"
+   },
+   "porta": {
+    "minaccia": "un estraneo preme dalla porta il bottone della board ops come fosse il fondatore",
+    "chiude": "home_screen mostra il bottone solo a chi is_platform_owner riconosce; panel:ops forzato passa da platform.allowed e torna col motivo",
+    "prova": "test_l_estraneo_che_forza_il_bottone_ops_dalla_porta_resta_fuori"
+   }
+  },
+  {
+   "stride": "tampering",
+   "minaccia": "un co-capo toglie il bot al clan",
+   "chiude": "keeps_bot da il bot al capo del momento e a chi l'ha creato se e ancora nel clan",
+   "prova": "test_il_co_capo_non_toglie_il_bot",
+   "segnala": {
+    "minaccia": "un membro forgia il bottone di una categoria a testo libero",
+    "chiude": "on_feedback_callback accetta dal membro solo le quattro scelte fisse: f:idea non apre il passo del testo e non scrive",
+    "prova": "test_il_membro_che_forgia_la_categoria_libera_non_scrive"
+   },
+   "crea": {
+    "minaccia": "un bot di clan prende con /newclan o con un codice il clan servito da un altro bot",
+    "chiude": "link_clan e /newclan leggono bot_for_tag: un clan di un altro bot risponde col motivo e non scrive",
+    "prova": "test_il_codice_di_un_clan_servito_da_un_altro_bot_non_collega"
+   },
+   "porta": {
+    "minaccia": "un bottone forgiato della porta chiede la scheda di un clan o un gesto che non c'e",
+    "chiude": "on_home_callback conosce solo new, clans e back: ogni altro dato risponde e non legge ne scrive",
+    "prova": "test_un_gesto_della_porta_che_non_esiste_non_apre_niente"
+   }
+  },
+  {
+   "stride": "repudiation",
+   "minaccia": "la piattaforma apre i dati di un clan e nessuno puo dire chi quando e perche",
+   "chiude": "il console apre solo da b:open col motivo: open_bot scrive la riga nel registro di ogni clan del bot e avvisa il capo in Casella",
+   "prova": "test_la_piattaforma_che_apre_col_motivo_lascia_la_riga_e_l_avviso",
+   "segnala": {
+    "minaccia": "una segnalazione arriva al gestore e nessuno sa da chi e da quale bot",
+    "chiude": "la tessera porta la scelta, l'id di chi la manda, il bot e il clan",
+    "prova": "test_la_segnalazione_a_scelta_fissa_arriva_con_chi_e_da_dove"
+   },
+   "crea": {
+    "minaccia": "un bot nasce e nessuno sa per quale clan e da chi",
+    "chiude": "la nascita vuole il flusso col tag del clan; il codice del gruppo porta tag, chi l'ha creato e il bot",
+    "prova": "test_the_creation_fetches_the_token_registers_it_and_starts_the_bot"
+   },
+   "porta": {
+    "minaccia": "un bot nasce dal bottone della porta saltando il flusso che dice chi e per quale clan",
+    "chiude": "il bottone chiama cmd_newbot: stesso flusso di /newbot, con termini, tag e villaggio provato; la porta non scrive niente di suo",
+    "prova": "test_il_bottone_crea_apre_il_flusso_di_creazione"
+   }
+  },
+  {
+   "stride": "information_disclosure",
+   "minaccia": "la piattaforma apre i dati privati senza dichiarare un motivo",
+   "chiude": "may_touch senza motivo in mano non passa: il console mostra le quattro scelte fisse e non apre niente",
+   "prova": "test_la_piattaforma_non_ferma_il_bot_di_un_altro_senza_motivo",
+   "segnala": {
+    "minaccia": "il membro mette nel testo dati di altri o collegamenti che arrivano al gestore",
+    "chiude": "la segnalazione del membro e una scelta fissa senza testo e non si salva: resta solo il segno dell'attesa",
+    "prova": "test_la_segnalazione_a_scelta_fissa_non_porta_testo_ne_si_salva"
+   },
+   "crea": {
+    "minaccia": "il token del gioco scritto per provare il villaggio torna nelle risposte o nei log",
+    "chiude": "check_token lo passa solo a verify_token: nessuna risposta e nessun log lo ripete",
+    "prova": "test_a_token_the_game_refuses_leaves_the_creation_closed"
+   },
+   "porta": {
+    "minaccia": "l'elenco dei clan serviti lascia uscire tag, uid, bot o dati della scheda di un clan",
+    "chiude": "served_card scrive solo nome, livello, membri e posti liberi delle righe di recruit_board; il clan senza nome resta anonimo",
+    "prova": "test_nell_elenco_non_c_e_nessun_uid_ne_tag_ne_altro_della_scheda"
+   }
+  },
+  {
+   "stride": "denial_of_service",
+   "minaccia": "chi ha creato il bot ed e uscito dal clan lo ferma per tutti quelli che restano",
+   "chiude": "chi ha creato il bot lo tiene solo finche ha un villaggio provato nella rosa",
+   "prova": "test_chi_ha_creato_il_bot_e_uscito_dal_clan_non_lo_ferma_piu",
+   "segnala": {
+    "minaccia": "un membro martella il gestore di segnalazioni",
+    "chiude": "una segnalazione per persona ogni COOLDOWN, anche a scelta fissa",
+    "prova": "test_una_seconda_segnalazione_troppo_presto_viene_fermata"
+   },
+   "crea": {
+    "minaccia": "un membro, o chi non guida piu il clan e tiene un bot mai portato nel gruppo, occupa il posto del bot del clan o lo porta nel gruppo col codice",
+    "chiude": "solo capo e co-capi verificati creano e un clan ha un bot solo (indice unico sul clan di nascita); il bot senza gruppo tiene il clan finche chi lo tiene e capo o co-capo nella rosa, poi il capo verificato di adesso crea il suo e quello vecchio resta registrato senza clan, nello stesso passo della nascita; link_clan rilegge il ruolo di chi collega e il codice del gruppo non vale per chi non guida piu",
+    "prova": "test_start_col_codice_nel_gruppo_rilegge_il_ruolo_e_tiene_il_codice"
+   },
+   "porta": {
+    "minaccia": "chi martella l'elenco fa leggere ogni volta tutta la bacheca",
+    "chiude": "una lettura sola di recruit_board per tocco, con il tetto PAGE_SIZE, e la tessera passa da clip",
+    "prova": "test_l_elenco_dei_clan_serviti_legge_la_bacheca_e_mostra_nome_livello_membri_posti"
+   }
+  },
+  {
+   "stride": "elevation_of_privilege",
+   "minaccia": "un anziano muove gli interruttori di chi vede cosa",
+   "chiude": "l'azione views vale manager: allowed rifiuta il livello limitato con not_manager",
+   "prova": "test_l_anziano_non_muove_gli_interruttori",
+   "segnala": {
+    "minaccia": "chi non ha premuto il tasto dei termini crea un bot o collega un villaggio",
+    "chiude": "create_managed e link_verified leggono la data dei termini: senza, rispondono col motivo e non scrivono",
+    "prova": "test_la_creazione_senza_il_tasto_non_scrive"
+   },
+   "crea": {
+    "minaccia": "un bot nato dal link diretto salta il cancello della creazione",
+    "chiude": "create_managed senza il flusso col tag del clan risponde con la regola e non registra",
+    "prova": "test_il_bot_nato_dal_link_senza_flusso_non_si_registra"
+   },
+   "porta": {
+    "minaccia": "il delegato o un bandito ottengono dalla porta piu di quanto spetta loro",
+    "chiude": "il delegato non ha il bottone ops; il bandito che tocca crea riceve il rifiuto di cmd_newbot",
+    "prova": "test_il_delegato_non_vede_la_board_ops"
+   }
+  }
+ ]
+}
