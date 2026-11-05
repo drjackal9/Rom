@@ -20,3 +20,8 @@ translator (branch: translator)
 
 Applicazione per tradurre testi di canzoni.
 Tecnologie: Python, GUI Tkinter
+
+clanboard (branch: clanboard)
+
+Bot Telegram per i clan di Clash of Clans, in 20 lingue: guerre, CWL, Capitale, Giochi del clan, una Mini App per ogni membro e un sito. Open source sotto AGPL-3.0.
+Tecnologie: Python, PostgreSQL, Docker, JavaScript
